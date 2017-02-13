@@ -5,6 +5,7 @@ import {translate} from 'focus-core/translation';
 import uuid from 'uuid';
 
 import Button from '../../components/button';
+import Tooltip from '../../components/tooltip';
 
 
 const Dropdown = {
@@ -33,6 +34,7 @@ const Dropdown = {
     */
     propTypes: {
         position: PropTypes.string,
+        hasTooltip: PropTypes.bool,
         iconProps: PropTypes.object,
         operationList: PropTypes.array,
         shape: PropTypes.string
@@ -88,7 +90,7 @@ const Dropdown = {
     * @returns  {XML} Htm code.
     */
     render() {
-        const {iconProps, operationList, position, shape} = this.props;
+        const {iconProps, operationList, position, shape, hasTooltip, name} = this.props;
         const id = this._htmlId;
         if (0 === operationList.length) {
             return null;
@@ -105,6 +107,7 @@ const Dropdown = {
                         );
                     })}
                 </ul>
+                {hasTooltip && <Tooltip htmlFor={id} label={translate(name)}/>}
             </div>
         );
     }

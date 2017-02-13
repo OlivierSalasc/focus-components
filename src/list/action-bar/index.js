@@ -104,7 +104,7 @@ const ActionBar = {
       }
       const orderIcon = 'sort_by_alpha';
       return (
-        <Dropdown iconProps={{name: orderIcon}} key='down' operationList={orderOperationList}/>
+        <Dropdown iconProps={{name: orderIcon}} key='down' operationList={orderOperationList} hasTooltip={true} name='search.sort.action'/>
       );
     }
     return null;
@@ -131,7 +131,7 @@ const ActionBar = {
       }]);
       const groupIcon ='folder_open';
       return (
-        <Dropdown iconProps={{name: groupIcon}} operationList={groupOperationList}/>
+        <Dropdown iconProps={{name: groupIcon}} operationList={groupOperationList} hasTooltip={true} name='search.group.action'/>
       );
     }
     return null;
