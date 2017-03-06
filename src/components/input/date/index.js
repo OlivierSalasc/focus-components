@@ -72,11 +72,15 @@ class InputDate extends Component {
         const {inputDate: startDate} = this.state;
     }
 
-    componentWillReceiveProps({value}) {
-        this.setState({
-            dropDownDate: isISOString(value) ? moment.utc(value, moment.ISO_8601) : moment.utc(),
-            inputDate: this._formatDate(value)
-        });
+    componentWillReceiveProps({value, error}) {
+        const {isValid} = this.state;
+        if(this.props.error === error || isValid){
+            this.setState({
+                dropDownDate: isISOString(value) ? moment.utc(value, moment.ISO_8601) : moment.utc(),
+                inputDate: this._formatDate(value)
+            });
+        }
+
     }
 
     componentWillUnmount() {
@@ -111,7 +115,7 @@ class InputDate extends Component {
             this.setState({ inputDate });
         }
         if (fromBlur !== true && isCorrect) {
-            this.props.onChange(dropDownDate.toISOString());
+            this.props.onChange(inputDate, dropDownDate);
         }
     };
 
@@ -135,12 +139,13 @@ class InputDate extends Component {
     };
 
     _onDocumentClick = ({target}) => {
+        const {displayPicker} = this.state;
         const targetClassAttr = target.getAttribute('class');
         const isTriggeredFromPicker = targetClassAttr ? targetClassAttr.includes('dp-cell') : false; //this is the only way to check the target comes from picker cause at this stage, month and year div are unmounted by React.
-        if (!isTriggeredFromPicker) {
+        if (!isTriggeredFromPicker && displayPicker) {
             //if target was not triggered inside the date picker, we check it was not triggered by the input
             if (closest(target, `[data-id='${this._inputDateId}']`, true) === undefined) {
-                this.setState({ displayPicker: false }, () => this._onInputBlur());
+                this.setState({ displayPicker: false });
             }
         }
     };
@@ -153,7 +158,7 @@ class InputDate extends Component {
 
     getValue = () => {
         const {inputDate} = this.state;
-        const rawValue = this._isInputFormatCorrect(inputDate) ? this._parseInputDate(inputDate).toISOString() : null;
+        const rawValue = this._isInputFormatCorrect(inputDate) ? this._parseInputDate(inputDate).toISOString() : inputDate;
         return this.props.beforeValueGetter(rawValue);
     };
 

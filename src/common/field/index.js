@@ -51,6 +51,10 @@ const FieldMixin = {
         const stateClass = this.state.error ? 'is-invalid' : '';
         return `mdl-grid ${stateClass}`;
     },
+
+    onChangeDate(value){
+        this.setState({value})
+    },
     /** @inheritdoc */
     render() {
         const {error} = this.state;

@@ -118,6 +118,7 @@ const fieldBuiltInComponentsMixin = {
             ...this.props,
             id,
             onChange,
+            onChangeDate:this.onChangeDate,
             value,
             error,
             placeholder
