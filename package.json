@@ -1,26 +1,19 @@
 {
-  "name": "focus-components",
-  "version": "2.1.2",
-  "description": "Focus component repository.",
-  "main": "index.js",
-  "scripts": {
-    "babelify": "better-npm-run babelify",
-    "bundle": "better-npm-run bundle",
-    "copy-sass": "better-npm-run copy-sass",
-    "build": "node scripts/mdl-variables-copy.js && better-npm-run babelify && better-npm-run copy-sass && better-npm-run bundle",
-    "test": "better-npm-run test",
-    "test:watch": "better-npm-run test-watch",
-    "postinstall": "node scripts/mdl-variables-copy.js",
-    "profile": "better-npm-run profile",
-    "prepublish": "npm run build",
-    "fix-lint": "eslint --fix src/** || exit 0"
-  },
-  "betterScripts": {
-    "babelify": {
-      "env": {
-        "BABEL_ENV": "production"
-      },
-      "command": "node scripts/babelify.js"
+    "name": "focus-components",
+    "version": "2.1.6",
+    "description": "Focus component repository.",
+    "main": "index.js",
+    "scripts": {
+        "babelify": "better-npm-run babelify",
+        "bundle": "better-npm-run bundle",
+        "copy-sass": "better-npm-run copy-sass",
+        "build": "node scripts/mdl-variables-copy.js && better-npm-run babelify && better-npm-run copy-sass && better-npm-run bundle",
+        "test": "better-npm-run test",
+        "test:watch": "better-npm-run test-watch",
+        "postinstall": "node scripts/mdl-variables-copy.js",
+        "profile": "better-npm-run profile",
+        "prepublish": "npm run build",
+        "fix-lint": "eslint --fix src/** || exit 0"
     },
     "copy-sass": {
       "command": "cd src && find . -name *.scss | xargs tar cvf - | tar xfp - -C ../"
